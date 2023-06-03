@@ -8,14 +8,19 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="player.css">
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="player.js"></script>
+    <script src="script.js"></script>
     <style>
-        #jokeContainer{
+        #jokeContainer {
             display: flex;
             flex-direction: column;
             gap: 1rem;
             width: 80%;
             font-size: 20px;
         }
+
         .span {
             color: brown;
             display: inline-block;
@@ -24,17 +29,50 @@
 
         }
     </style>
+    <script>
+        // Global variable for the YouTube player
+        var player;
+
+        // Function to toggle play and pause
+        function togglePlay() {
+            if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '360',
+                width: '640',
+                videoId: 'lrb3tT7ru9E',
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+    </script>
 
 </head>
 
 <body>
+    <div class="music">
+        <div id="player" style="display: none; visibility: hidden;"></div>
+        <button id="playAudio" onclick="togglePlay()">
+
+        </button>
+    </div>
     <div class="content">
         <div id="jokeContainer">
-            <span class="span"> Warning: </span> 
-            <span >our content can be as dark as a black hole at times. If you're easily offended or have a sensitivity to jokes that push
-            the boundaries, this may not be the ideal place for you. However, if you're ready to embrace the
-            darkness and have a good laugh, strap in and enjoy the wickedly humorous journey ahead! Just remember, our jokes
-            are like shadows - they may be dark, but they'll never bite!</span>
+            <span class="span"> Warning: </span>
+            <span>our content can be as dark as a black hole at times. If you're easily offended or have a sensitivity
+                to jokes that push
+                the boundaries, this may not be the ideal place for you. However, if you're ready to embrace the
+                darkness and have a good laugh, strap in and enjoy the wickedly humorous journey ahead! Just remember,
+                our jokes
+                are like shadows - they may be dark, but they'll never bite!</span>
         </div>
 
         <div class="button">
@@ -43,7 +81,12 @@
             <button class="button-56" onclick="getAnyJoke()">Any Joke</button>
         </div>
     </div>
-    <script src="script.js"></script>
+
+
+
+
+
+
 </body>
 
 </html>
